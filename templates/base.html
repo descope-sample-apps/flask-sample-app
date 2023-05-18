@@ -41,20 +41,19 @@
         button:focus {
             outline: none;
         }
-        h1 {
+        h1, h2 {
             margin: 0;
         }
         .title {
+            margin-top: 10vh;
             margin-bottom: 3vh;
         }
     </style>
 </head>
 <body>
-    <div class="layout row">
-        <a class="link" href="{{ url_for('home') }}">Home</a>
-        <a class="link" href="{{ url_for('login') }}">Login</a>
-    </div>
     <div class="layout">
+        <h1 class="title">Descope-Flask Demo</h1>
+
         {% block content %}
         {% endblock %}
     </div>

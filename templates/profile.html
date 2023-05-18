@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="title">{% block title %} Logged In {% endblock %}</h1>
+    <h1 class="title">{% block title %} Profile {% endblock %}</h1>
     <h1 id="isLoggedIn"></h1>
     <h2> Welcome <span id="userName"></span></h2>
-    <h2> User Info: <span id="userId"></span></h2>
     <button class="link logout" onclick="logout()">Logout</button>
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
         const user = document.getElementById('userName');
-        const userName = localStorage.getItem('dls_last_user_display_name')
 
-        if (userName) {
-            user.innerHTML = userName + " 👋"
-        } else {
-            user.innerHTML = "❌"
-        }
+        fetch('/profile', {
+            headers: {
+                Accept: 'application/json',
+                session: sessionToken,
+            }
+        }).then(data => {
+            return data.json()
+        }).then(jsonData => {
+            if (userName) {
+                user.innerHTML = jsonData.status + " 👋"
+            } else {
+                user.innerHTML = "❌"
+            }
+        });
+
         async function logout() {
             await sdk.logout()
             window.location.href = "/"

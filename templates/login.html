@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Login {% endblock %}</h1>
+    <div id="container"></div>
+
+    <script src="{{url_for('static', filename='descope.js')}}"></script>
+    <script>
+        const container = document.getElementById('container');
+
+        if (!sessionToken || notValidToken) {
+            container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>';
+            const wcElement = document.getElementsByTagName('descope-wc')[0];
+
+            const onSuccess = (e) => {
+                sdk.refresh() 
+                fetch("/login", {
+                    method: "POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(e.detail.sessionJwt)
+                })
+                .then(data => {
+                    return data.json()
+                }).then(jsonData => {
+                    console.log(jsonData)
+                    window.location.href = "/profile"
+                });
+            }
+
+            const onError = (err) => console.log(err);
+
+            wcElement.addEventListener('success', onSuccess);
+            wcElement.addEventListener('error', onError);
+        }
+    </script>
+{% endblock %}
