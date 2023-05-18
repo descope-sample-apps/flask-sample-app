@@ -1,4 +1,4 @@
-const projectId = "P2Pq03wpnnjxJajSUKDuy2xviLNV"
+const projectId = "P2PvuraQbUIEivQPBGbxO9M7O8Qy"
 const sdk = Descope({ projectId: projectId, persistTokens: true, autoRefresh: true });
 const sessionToken = sdk.getSessionToken()
 var notValidToken
