@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Home {% endblock %}</h1>
+
+    <div class="layout row">
+        <a class="link" href="{{ url_for('home') }}">Home</a>
+        <a id="loginOrProfile" class="link" href=""></a>
+    </div>
+    <script src="{{url_for('static', filename='descope.js')}}"></script>
+    <script>
+        const loginOrProfile = document.getElementById('loginOrProfile');
+
+        if (!validRefreshToken) {
+            loginOrProfile.href = "{{ url_for('login') }}"
+            loginOrProfile.innerHTML = "Login"
+        } else {
+            loginOrProfile.href = "{{ url_for('profile') }}"
+            loginOrProfile.innerHTML = "Profile"
+        }
+    </script>
+{% endblock %}

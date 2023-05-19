@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <a class="home" href="{{ url_for('home') }}">&#8592 Home</a>
+    <h1 class="title">{% block title %} Profile {% endblock %}</h1>
+    <h2> Welcome <span id="userName"></span> 👋</h2>
+    <p class="email" id="userEmail"></p>
+    <button class="link logout" onclick="logout()">Logout</button>
+
+    <script src="{{url_for('static', filename='descope.js')}}"></script>
+    <script>
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
+
+        if (validRefreshToken || sessionToken) {
+            getProfile()
+        } else {
+            window.location.href = "/login"
+        }
+
+        async function getProfile() {
+            const profile = await sdk.me()
+            userName.innerHTML = profile.data.name
+            userEmail.innerHTML = profile.data.email
+        }
+
+        async function logout() {
+            await sdk.logout()
+            window.location.href = "/login"
+        }
+    </script>
+{% endblock %}
+
+
