@@ -12,7 +12,6 @@ from descope import (
 )
 import json
 import os
-from functools import wraps
 
 
 app = Flask(__name__)
