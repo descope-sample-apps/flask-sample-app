@@ -34,6 +34,8 @@
 
             wcElement.addEventListener('success', onSuccess);
             wcElement.addEventListener('error', onError);
+        } else {
+            window.location.href = "/profile"
         }
     </script>
 {% endblock %}

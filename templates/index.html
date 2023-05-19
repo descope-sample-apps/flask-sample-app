@@ -5,6 +5,18 @@
 
     <div class="layout row">
         <a class="link" href="{{ url_for('home') }}">Home</a>
-        <a class="link" href="{{ url_for('login') }}">Login</a>
+        <a id="loginOrProfile" class="link" href=""></a>
     </div>
+    <script src="{{url_for('static', filename='descope.js')}}"></script>
+    <script>
+        const loginOrProfile = document.getElementById('loginOrProfile');
+
+        if (!validRefreshToken) {
+            loginOrProfile.href = "{{ url_for('login') }}"
+            loginOrProfile.innerHTML = "Login"
+        } else {
+            loginOrProfile.href = "{{ url_for('profile') }}"
+            loginOrProfile.innerHTML = "Profile"
+        }
+    </script>
 {% endblock %}

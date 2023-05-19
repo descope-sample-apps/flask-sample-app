@@ -39,7 +39,6 @@ def login():
         try:
             jwt_response = descope_client.validate_session(session_token=session_token)
             print(jwt_response)
-            return redirect(url_for('profile', res=jwt_response))
             return { "status": jwt_response }
         except Exception as error:
             print ("Could not validate user session. Error:")
