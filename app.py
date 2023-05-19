@@ -25,24 +25,6 @@ except Exception as error:
     print (error)
 
 
-def authorize(f):
-    @wraps(f)
-    def decorated_function(*args, **kws):
-            if not 'Authorization' in request.headers:
-               abort(401)
-
-            user = None
-            data = request.headers['Authorization'].encode('ascii','ignore')
-            token = str.replace(str(data), 'Bearer ','')
-            try:
-                user = jwt.decode(token, JWT_SECRET, algorithms=['HS256'])['sub']
-            except:
-                abort(401)
-
-            return f(user, *args, **kws)            
-    return decorated_function
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -51,10 +33,13 @@ def home():
 @app.route('/login', methods=["GET", "POST"])
 def login(): 
     if request.method == "POST":
-        session_token = request.get_json()
+        auth_request = request.headers['Authorization']
+        session_token = auth_request.replace('Bearer ', '') # get the session token
+
         try:
             jwt_response = descope_client.validate_session(session_token=session_token)
             print(jwt_response)
+            return redirect(url_for('profile', res=jwt_response))
             return { "status": jwt_response }
         except Exception as error:
             print ("Could not validate user session. Error:")
@@ -64,13 +49,8 @@ def login():
     return render_template("login.html")
 
 
-@app.route('/profile', methods=["GET", "POST"])
+@app.route('/profile')
 def profile():
-    if request.headers.get('session'):
-        return {"status": "Logged In"}
-    else:
-        redirect("login")
-
     return render_template("profile.html")
 
 

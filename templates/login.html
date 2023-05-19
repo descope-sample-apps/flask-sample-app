@@ -8,7 +8,7 @@
     <script>
         const container = document.getElementById('container');
 
-        if (!sessionToken || notValidToken) {
+        if (!validRefreshToken) {
             container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>';
             const wcElement = document.getElementsByTagName('descope-wc')[0];
 
@@ -19,8 +19,8 @@
                     headers: {
                         'Accept': 'application/json',
                         'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(e.detail.sessionJwt)
+                        'Authorization': 'Bearer ' + e.detail.sessionJwt
+                    }
                 })
                 .then(data => {
                     return data.json()

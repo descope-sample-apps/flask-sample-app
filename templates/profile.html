@@ -2,32 +2,30 @@
 
 {% block content %}
     <h1 class="title">{% block title %} Profile {% endblock %}</h1>
-    <h1 id="isLoggedIn"></h1>
-    <h2> Welcome <span id="userName"></span></h2>
+    <h1 id="userName"></h1>
+    <h2> Welcome <span id="userEmail"></span></h2>
     <button class="link logout" onclick="logout()">Logout</button>
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
-        const user = document.getElementById('userName');
+        const userName = document.getElementById('userName');
+        const userEmail = document.getElementById('userEmail');
 
-        fetch('/profile', {
-            headers: {
-                Accept: 'application/json',
-                session: sessionToken,
-            }
-        }).then(data => {
-            return data.json()
-        }).then(jsonData => {
-            if (userName) {
-                user.innerHTML = jsonData.status + " 👋"
-            } else {
-                user.innerHTML = "❌"
-            }
-        });
+        if (validRefreshToken || sessionToken) {
+            getProfile()
+        } else {
+            window.location.href = "/login"
+        }
+
+        async function getProfile() {
+            const profile = await sdk.me()
+            userName.innerHTML = profile.data.name
+            userEmail.innerHTML = profile.data.email
+        }
 
         async function logout() {
             await sdk.logout()
-            window.location.href = "/"
+            window.location.href = "/login"
         }
     </script>
 {% endblock %}
