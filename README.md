@@ -6,7 +6,8 @@ Using the Python framework Flask + Descope Python SDK to add authentication and 
 
 ## Setup + Installing Dependencies 🛠️
 
-1. Setup your project: ```make setup``` 
+1. Setup your project using the command: ```make setup``` <br>
+This will create a virtual environment and install all dependencies for you.
 2. Go to static/descope.js and add your project id in the quotes: ```const projectId = ""```
 3. Create a ```.env``` file and inside and add your project id in the file:  ```PROJECT_ID=YOUR_PROJECT_ID```
 

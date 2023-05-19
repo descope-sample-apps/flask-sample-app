@@ -1,16 +1,5 @@
 from flask import Flask, render_template, request, redirect, make_response, jsonify
-from descope import (
-    REFRESH_SESSION_TOKEN_NAME,
-    SESSION_TOKEN_NAME,
-    AuthException,
-    DeliveryMethod,
-    DescopeClient,
-    AssociatedTenant,
-    RoleMapping,
-    AttributeMapping,
-    LoginOptions
-)
-import json
+from descope import DescopeClient
 import os
 
 
