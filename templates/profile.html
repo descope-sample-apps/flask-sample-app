@@ -12,9 +12,9 @@
         const userName = document.getElementById('userName')
         const userEmail = document.getElementById('userEmail')
 
-        if (validRefreshToken || sessionToken) {
+        if (sessionToken) {
             getProfile()
-        } else if (validRefreshToken || !sessionToken) {
+        } else if (validRefreshToken && !sessionToken) {
             sdk.refresh()
         } else {
             window.location.href = "/login"
