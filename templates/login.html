@@ -6,11 +6,12 @@
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
-        const container = document.getElementById('container');
+        const container = document.getElementById('container')
 
         if (!validRefreshToken) {
-            container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>';
-            const wcElement = document.getElementsByTagName('descope-wc')[0];
+            container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>'
+            const wcElement = document.getElementsByTagName('descope-wc')[0]
+
 
             const onSuccess = (e) => {
                 sdk.refresh() 
@@ -30,10 +31,11 @@
                 });
             }
 
+
             const onError = (err) => console.log(err);
 
-            wcElement.addEventListener('success', onSuccess);
-            wcElement.addEventListener('error', onError);
+            wcElement.addEventListener('success', onSuccess)
+            wcElement.addEventListener('error', onError)
         } else {
             window.location.href = "/profile"
         }
