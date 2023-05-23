@@ -9,20 +9,24 @@
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
-        const userName = document.getElementById('userName');
-        const userEmail = document.getElementById('userEmail');
+        const userName = document.getElementById('userName')
+        const userEmail = document.getElementById('userEmail')
 
-        if (validRefreshToken || sessionToken) {
+        if (sessionToken) {
             getProfile()
+        } else if (validRefreshToken && !sessionToken) {
+            sdk.refresh()
         } else {
             window.location.href = "/login"
         }
 
+        
         async function getProfile() {
             const profile = await sdk.me()
             userName.innerHTML = profile.data.name
             userEmail.innerHTML = profile.data.email
         }
+
 
         async function logout() {
             await sdk.logout()

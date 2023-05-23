@@ -4,16 +4,16 @@
     <h1 class="title">{% block title %} Login {% endblock %}</h1>
     <div id="container"></div>
 
-    <script src="{{url_for('static', filename='descope.js')}}"></script>
+    <script src="{{url_for('static', filename='descope.js')}}"></script> 
     <script>
-        const container = document.getElementById('container');
+        const container = document.getElementById('container')
 
-        if (!validRefreshToken) {
-            container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>';
-            const wcElement = document.getElementsByTagName('descope-wc')[0];
+        if (!validRefreshToken) { 
+            container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>'
+            const wcElement = document.getElementsByTagName('descope-wc')[0]
+
 
             const onSuccess = (e) => {
-                sdk.refresh() 
                 fetch("/login", {
                     method: "POST",
                     headers: {
@@ -30,11 +30,13 @@
                 });
             }
 
+
             const onError = (err) => console.log(err);
 
-            wcElement.addEventListener('success', onSuccess);
-            wcElement.addEventListener('error', onError);
+            wcElement.addEventListener('success', onSuccess)
+            wcElement.addEventListener('error', onError)
         } else {
+            // will check if client has valid refresh token in /profile and autoRefresh if possible 
             window.location.href = "/profile"
         }
     </script>
