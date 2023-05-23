@@ -1,6 +1,6 @@
 # Flask Sample App + Descope Auth
 
-Using the Python framework Flask + Descope Python SDK to add authentication and manage basic authentication
+Using the Python framework Flask + Descope Python SDK to add and manage basic authentication
 
 <br>
 
