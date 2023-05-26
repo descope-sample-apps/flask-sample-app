@@ -3,5 +3,5 @@ const sdk = Descope({ projectId: projectId, persistTokens: true, autoRefresh: tr
 
 const sessionToken = sdk.getSessionToken()
 
-const refreshToken = sdk.getRefreshToken()
-const validRefreshToken = refreshToken && !sdk.isJwtExpired(refreshToken)
+// const refreshToken = sdk.getRefreshToken()
+// const validRefreshToken = refreshToken && !sdk.isJwtExpired(refreshToken)

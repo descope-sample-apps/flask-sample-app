@@ -12,20 +12,54 @@
         const userName = document.getElementById('userName')
         const userEmail = document.getElementById('userEmail')
 
+        console.log(sessionToken)
         if (sessionToken) {
             getProfile()
-        } else if (validRefreshToken && !sessionToken) {
-            sdk.refresh()
+        // } else if (validRefreshToken && !sessionToken) {
+        //     sdk.refresh()
         } else {
             window.location.href = "/login"
         }
 
         
         async function getProfile() {
-            const profile = await sdk.me()
-            userName.innerHTML = profile.data.name
-            userEmail.innerHTML = profile.data.email
+            console.log(sessionToken)
+            fetch('/profile', { // call the api endpoint from the flask server
+                headers: {
+                    Accept: 'application/json',
+                    Authorization: 'Bearer ' + sessionToken,
+                }
+            }).then(data => {
+                if (data.status === 401) {
+                    window.location.href = '/login'
+                }
+                displayProfile = true
+                return data.json()
+            }).then(jsonData => {
+                console.log(jsonData)
+            }).catch((err) => {
+                console.log(err)
+                window.location.href = '/login'
+            })
+            // const profile = await sdk.me()
+            // userName.innerHTML = profile.data.name
+            // userEmail.innerHTML = profile.data.email
         }
+
+        // if (sessionToken) {
+        //     getProfile()
+        // } else if (validRefreshToken && !sessionToken) {
+        //     sdk.refresh()
+        // } else {
+        //     window.location.href = "/login"
+        // }
+
+        
+        // async function getProfile() {
+        //     const profile = await sdk.me()
+        //     userName.innerHTML = profile.data.name
+        //     userEmail.innerHTML = profile.data.email
+        // }
 
 
         async function logout() {

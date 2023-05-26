@@ -8,26 +8,31 @@
     <script>
         const container = document.getElementById('container')
 
-        if (!validRefreshToken) { 
+        if (!sessionToken) { 
             container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>'
             const wcElement = document.getElementsByTagName('descope-wc')[0]
 
 
             const onSuccess = (e) => {
-                fetch("/login", {
-                    method: "POST",
+                sdk.refresh()
+                fetch('/profile', { // call the api endpoint from the flask server
                     headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + e.detail.sessionJwt
+                        Accept: 'application/json',
+                        Authorization: 'Bearer ' + sessionToken,
                     }
-                })
-                .then(data => {
+                }).then(data => {
+                    if (data.status === 401) {
+                        window.location.href = '/login'
+                    }
+                    displayProfile = true
                     return data.json()
                 }).then(jsonData => {
                     console.log(jsonData)
-                    window.location.href = "/profile"
-                });
+                }).catch((err) => {
+                    console.log(err)
+                    window.location.href = '/login'
+                })
+                window.location.href = "/profile"
             }
 
 

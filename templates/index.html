@@ -11,7 +11,7 @@
     <script>
         const loginOrProfile = document.getElementById('loginOrProfile');
 
-        if (!validRefreshToken) {
+        if (!sessionToken) {
             loginOrProfile.href = "{{ url_for('login') }}"
             loginOrProfile.innerHTML = "Login"
         } else {
