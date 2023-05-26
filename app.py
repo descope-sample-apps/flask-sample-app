@@ -52,8 +52,7 @@ def profile():
 @app.route('/get_profile')
 @token_required
 def get_profile(jwt_response):
-    print(jwt_response)
-    return render_template("profile.html", jwt_response)
+    return jwt_response
 
 
 if __name__ == "main":

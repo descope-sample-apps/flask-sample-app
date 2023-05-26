@@ -35,13 +35,9 @@
             })
         }
 
-        profileContainer.addEventListener('load', function() {
+        if (sessionToken) {
             const data = getProfileData();
             console.log(data)
-        });
-
-        if (sessionToken) {
-
         } else if (validRefreshToken && !sessionToken) {
             sdk.refresh()
         } else {

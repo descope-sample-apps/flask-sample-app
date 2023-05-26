@@ -12,12 +12,10 @@
             container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>'
             const wcElement = document.getElementsByTagName('descope-wc')[0]
 
-
             const onSuccess = (e) => {
                 sdk.refresh()
                 window.location.href = "/profile"
             }
-
 
             const onError = (err) => console.log(err);
 
