@@ -14,7 +14,6 @@ except Exception as error:
     print (error)
 
 
-
 def token_required(f): # auth decorator
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -35,21 +34,6 @@ def token_required(f): # auth decorator
     return decorator
 
 
-def authenticate(request_headers): # auth decorator
-    session_token = None
-        
-    if 'Authorization' in request_headers: # check if token in request
-        auth_request = request_headers['Authorization']
-        session_token = auth_request.replace('Bearer ', '')
-    if not session_token: # throw error
-        return make_response(jsonify({"error": "❌ invalid session token!"}), 401)
-
-    try: # validate token
-        return descope_client.validate_session(session_token=session_token)
-    except:
-        return redirect(url_for('login'))
-
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -62,14 +46,14 @@ def login():
 
 @app.route('/profile')
 def profile():
-    # jwt = authenticate(request.headers)
     return render_template("profile.html")
 
 
-@app.route('/get_profile_data', methods=["GET", "POST"])
+@app.route('/get_profile')
 @token_required
-def get_profile_data(jwt_response):
-    return jwt_response
+def get_profile(jwt_response):
+    print(jwt_response)
+    return render_template("profile.html", jwt_response)
 
 
 if __name__ == "main":

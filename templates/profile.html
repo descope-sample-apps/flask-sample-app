@@ -1,66 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a class="home" href="{{ url_for('home') }}">&#8592 Home</a>
-    <h1 class="title">{% block title %} Profile {% endblock %}</h1>
-    <h2> Welcome <span id="userName"></span> 👋</h2>
-    <p class="email" id="userEmail"></p>
-    <button class="link logout" onclick="logout()">Logout</button>
+    <div id="profile">
+        <a class="home" href="{{ url_for('home') }}">&#8592 Home</a>
+        <h1 class="title">{% block title %} Profile {% endblock %}</h1>
+        <h2> Welcome <span id="userName"></span> 👋</h2>
+        <p class="email" id="userEmail"></p>
+        <button id="get_data_btn" class="link logout" onclick="logout()">Logout</button>
+    </div>
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
         const userName = document.getElementById('userName')
         const userEmail = document.getElementById('userEmail')
+        const profileContainer = document.getElementById('profile')
 
-        console.log(sessionToken)
-        if (sessionToken) {
-            getProfile()
-        // } else if (validRefreshToken && !sessionToken) {
-        //     sdk.refresh()
-        } else {
-            window.location.href = "/login"
-        }
-
-        
-        async function getProfile() {
-            console.log(sessionToken)
-            fetch('/profile', { // call the api endpoint from the flask server
+        function getProfileData(){
+            fetch('/get_profile', { // call the api endpoint from the flask server
                 headers: {
                     Accept: 'application/json',
                     Authorization: 'Bearer ' + sessionToken,
                 }
             }).then(data => {
-                if (data.status === 401) {
+                if (data.status === 401) { // error
                     window.location.href = '/login'
                 }
-                displayProfile = true
                 return data.json()
             }).then(jsonData => {
                 console.log(jsonData)
+                return jsonData
             }).catch((err) => {
-                console.log(err)
+                console.log(err) // error
                 window.location.href = '/login'
             })
-            // const profile = await sdk.me()
-            // userName.innerHTML = profile.data.name
-            // userEmail.innerHTML = profile.data.email
         }
 
-        // if (sessionToken) {
-        //     getProfile()
-        // } else if (validRefreshToken && !sessionToken) {
-        //     sdk.refresh()
-        // } else {
-        //     window.location.href = "/login"
-        // }
+        profileContainer.addEventListener('load', function() {
+            const data = getProfileData();
+            console.log(data)
+        });
 
-        
-        // async function getProfile() {
-        //     const profile = await sdk.me()
-        //     userName.innerHTML = profile.data.name
-        //     userEmail.innerHTML = profile.data.email
-        // }
+        if (sessionToken) {
 
+        } else if (validRefreshToken && !sessionToken) {
+            sdk.refresh()
+        } else {
+            window.location.href = "/login"
+        }
 
         async function logout() {
             await sdk.logout()
