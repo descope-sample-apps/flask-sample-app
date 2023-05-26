@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div id="profile">
-        <a class="home" href="{{ url_for('home') }}">&#8592 Home</a>
-        <h1 class="title">{% block title %} Profile {% endblock %}</h1>
-        <h2> Welcome <span id="userName"></span> 👋</h2>
-        <p class="email" id="userEmail"></p>
-        <button id="get_data_btn" class="link logout" onclick="logout()">Logout</button>
-    </div>
+    <a class="home" href="{{ url_for('home') }}">&#8592 Home</a>
+    <h1 class="title">{% block title %} Profile {% endblock %}</h1>
+    <h2> Welcome <span id="userName"></span> 👋</h2>
+    <p class="email" id="userEmail"></p>
+    <h2>JWT:</h2>
+    <p class="jwt" id="jwt"></p>
+    <button id="get_data_btn" class="link logout" onclick="logout()">Logout</button>
 
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
+        sdk.refresh()
         const userName = document.getElementById('userName')
         const userEmail = document.getElementById('userEmail')
+        const JWT = document.getElementById('jwt')
         const profileContainer = document.getElementById('profile')
 
         function getProfileData(){
@@ -28,18 +30,22 @@
                 return data.json()
             }).then(jsonData => {
                 console.log(jsonData)
-                return jsonData
+                JWT.innerHTML = jsonData.jwt_response
             }).catch((err) => {
                 console.log(err) // error
                 window.location.href = '/login'
             })
         }
 
+        async function setNameEmail() {
+            const profile = await sdk.me()
+            userName.innerHTML = profile.data.name
+            userEmail.innerHTML = profile.data.email
+        }
+
         if (sessionToken) {
-            const data = getProfileData();
-            console.log(data)
-        } else if (validRefreshToken && !sessionToken) {
-            sdk.refresh()
+            getProfileData();
+            setNameEmail()
         } else {
             window.location.href = "/login"
         }
