@@ -13,6 +13,12 @@ This will create a virtual environment and install all dependencies for you.
 
 <br>
 
+## Running the Application 💡
+
+Run the Flask app using the following command: ```flask run```
+
+<br>
+
 ## What is going on? 🤔
 
 ### How do I get started with Descope?
