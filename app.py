@@ -52,10 +52,11 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route('/get_profile', methods=["GET"])
+@app.route('/get_secret_message', methods=["GET"])
 @token_required
-def get_profile(jwt_response):
-    return {"jwt_response": jwt_response["jwt"]}
+def get_secret_message(jwt_response):
+    print(jwt_response)
+    return {"secret_msg": "This is the secret message. Congrats!"}
 
 
 if __name__ == "main":
