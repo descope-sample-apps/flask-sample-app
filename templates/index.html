@@ -9,6 +9,7 @@
     </div>
     <script src="{{url_for('static', filename='descope.js')}}"></script>
     <script>
+        sdk.refresh()
         const loginOrProfile = document.getElementById('loginOrProfile');
 
         if (!sessionToken) {
