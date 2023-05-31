@@ -11,12 +11,19 @@
     <script>
         const loginOrProfile = document.getElementById('loginOrProfile');
 
-        if (!validRefreshToken) {
+        const refresh = Promise.resolve(sdk.refresh())
+        refresh.then((res) => {
+            if (res.ok) { 
+                loginOrProfile.href = "{{ url_for('profile') }}"
+                loginOrProfile.innerHTML = "Profile"
+            } else {
+                return Promise.reject(res); 
+            }
+        }).catch((error) => {
             loginOrProfile.href = "{{ url_for('login') }}"
             loginOrProfile.innerHTML = "Login"
-        } else {
-            loginOrProfile.href = "{{ url_for('profile') }}"
-            loginOrProfile.innerHTML = "Profile"
-        }
+            console.log("Error: ", error); 
+        });
+
     </script>
 {% endblock %}

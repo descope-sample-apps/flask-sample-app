@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, make_response, jsonify
+from flask import Flask, render_template, request, redirect, make_response, jsonify, url_for
 from descope import DescopeClient
 import os
+from functools import wraps
 
 
 app = Flask(__name__)
@@ -13,32 +14,49 @@ except Exception as error:
     print (error)
 
 
+def token_required(f): # auth decorator
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        # print(request.headers['Authorization'])
+        session_token = None
+        if 'Authorization' in request.headers: # check if token in request
+            auth_request = request.headers['Authorization']
+            session_token = auth_request.replace('Bearer ', '')
+        if not session_token: # throw error
+            return make_response(jsonify({"error": "❌ invalid session token in the request!"}), 401)
+
+        try: # validate token
+            jwt_response = descope_client.validate_session(session_token=session_token)
+        except:
+            return make_response(jsonify({"error": "❌ invalid session token!"}), 401)
+
+        print(jwt_response)
+
+        return f(jwt_response, *args, **kwargs)
+
+    return decorator
+
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route('/login')
 def login(): 
-    if request.method == "POST":
-        auth_request = request.headers['Authorization']
-        session_token = auth_request.replace('Bearer ', '') # get the session token
-
-        try:
-            jwt_response = descope_client.validate_session(session_token=session_token)
-            print(jwt_response)
-            return { "status": jwt_response }
-        except Exception as error:
-            print ("Could not validate user session. Error:")
-            print (error)
-            return { "error": error }
-
     return render_template("login.html")
 
 
 @app.route('/profile')
 def profile():
     return render_template("profile.html")
+
+
+@app.route('/get_secret_message', methods=["GET"])
+@token_required
+def get_secret_message(jwt_response):
+    print(jwt_response)
+    return {"secret_msg": "This is the secret message. Congrats!"}
 
 
 if __name__ == "main":

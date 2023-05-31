@@ -6,37 +6,23 @@
 
     <script src="{{url_for('static', filename='descope.js')}}"></script> 
     <script>
+        sdk.refresh()
         const container = document.getElementById('container')
 
-        if (!validRefreshToken) { 
+        if (!sessionToken) { 
             container.innerHTML = '<descope-wc project-id="' + projectId + '" flow-id="sign-up-or-in"></descope-wc>'
             const wcElement = document.getElementsByTagName('descope-wc')[0]
 
-
             const onSuccess = (e) => {
-                fetch("/login", {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + e.detail.sessionJwt
-                    }
-                })
-                .then(data => {
-                    return data.json()
-                }).then(jsonData => {
-                    console.log(jsonData)
-                    window.location.href = "/profile"
-                });
+                sdk.refresh()
+                window.location.href = "/profile"
             }
-
 
             const onError = (err) => console.log(err);
 
             wcElement.addEventListener('success', onSuccess)
             wcElement.addEventListener('error', onError)
         } else {
-            // will check if client has valid refresh token in /profile and autoRefresh if possible 
             window.location.href = "/profile"
         }
     </script>
