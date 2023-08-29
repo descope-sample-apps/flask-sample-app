@@ -1,7 +1,5 @@
 ![flask-sample-app](https://github.com/descope-sample-apps/flask-sample-app/assets/59460685/307e5349-3b6d-4b7d-87d0-5e0a4e63f5e0)
 
-# Flask Sample App + Descope Auth
-
 Using the Python framework Flask + Descope Python SDK to add and manage basic authentication
 
 ## ⚙️ Setup
