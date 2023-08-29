@@ -2,27 +2,42 @@
 
 Using the Python framework Flask + Descope Python SDK to add and manage basic authentication
 
-<br>
+## ⚙️ Setup
 
-## Setup + Installing Dependencies 🛠️
+1. Clone the repository:
 
-1. Setup your project using the command: ```make setup``` <br>
-This will create a virtual environment and install all dependencies for you.
-2. Go to static/descope.js and add your project id in the quotes: ```const projectId = ""```
-3. Create a ```.env``` file and inside and add your project id in the file:  ```PROJECT_ID=YOUR_PROJECT_ID```
+```
+git clone https://github.com/descope-sample-apps/flask-sample-app.git
+```
 
-<br>
+2. Install dependencies:
 
-## Running the Application 💡
+```
+make setup
+```
 
-Run the Flask app using the following command: ```flask run```
+3. Setup environment variables:
 
-<br>
+```
+PROJECT_ID="YOUR_DESCOPE_PROJECT_ID"
+```
 
-## What is going on? 🤔
+- ```DESCOPE_ID```: can be found in your Descope's account under the [Project page](https://app.descope.com/settings/project)
 
-### How do I get started with Descope?
-If you don't have a descope project or don't know what a project ID is, check out the [docs](https://docs.descope.com/build/guides/gettingstarted/)
+4. Go to static/descope.js and add your project id in the quotes: ```const projectId = ""```
 
-### What is Flask?
-Flask is a light-weight framework written in Python. It's super simple to get your web app started and running using Flask with just a couple of lines. To learn the basics of Flask check out the official [documentation](https://flask.palletsprojects.com/en/2.3.x/quickstart/)<br>
+## 🔮 Running the Application 
+
+To start the application, run:
+
+```
+flask run
+```
+
+## ⚠️ Issue Reporting
+
+For any issues or suggestions, feel free to open an issue in the GitHub repository.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
