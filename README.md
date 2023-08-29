@@ -1,22 +1,45 @@
-# Flask Sample App + Descope Auth
+![flask-sample-app](https://github.com/descope-sample-apps/flask-sample-app/assets/59460685/307e5349-3b6d-4b7d-87d0-5e0a4e63f5e0)
 
-Using the Python framework Flask + Descope Python SDK to add and manage basic authentication
+# Flask Sample App 
 
-## Setup + Installing Dependencies 🛠️
+Use the Flask Python framework and Descope's Python SDK to add and manage basic authentication.
 
-1. Setup your project using the command: ```make setup``` <br>
-This will create a virtual environment and install all dependencies for you.
-2. Go to static/descope.js and add your project id in the quotes: ```const projectId = ""```
-3. Create a ```.env``` file and inside and add your project id in the file:  ```PROJECT_ID=YOUR_PROJECT_ID```
+## ⚙️ Setup
 
-## Running the Application 💡
+1. Clone the repository:
 
-Run the Flask app using the following command: ```flask run```
+```
+git clone https://github.com/descope-sample-apps/flask-sample-app.git
+```
 
-## What is going on? 🤔
+2. Install dependencies:
 
-### How do I get started with Descope?
-If you don't have a descope project or don't know what a project ID is, check out the [docs](https://docs.descope.com/build/guides/gettingstarted/)
+```
+make setup
+```
 
-### What is Flask?
-Flask is a light-weight framework written in Python. It's super simple to get your web app started and running using Flask with just a couple of lines. To learn the basics of Flask check out the official [documentation](https://flask.palletsprojects.com/en/2.3.x/quickstart/)
+3. Setup environment variables:
+
+```
+PROJECT_ID="YOUR_DESCOPE_PROJECT_ID"
+```
+
+- ```DESCOPE_ID```: can be found in your Descope's account under the [Project page](https://app.descope.com/settings/project)
+
+4. Go to static/descope.js and add your project id in the quotes: ```const projectId = ""```
+
+## 🔮 Running the Application 
+
+To start the application, run:
+
+```
+flask run
+```
+
+## ⚠️ Issue Reporting
+
+For any issues or suggestions, feel free to open an issue in the GitHub repository.
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
