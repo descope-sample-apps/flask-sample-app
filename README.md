@@ -2,7 +2,7 @@
 
 ---
 
-Using the Python framework Flask + Descope Python SDK to add and manage basic authentication
+Use the Flask Python framework and Descope's Python SDK to add and manage basic authentication.
 
 ## ⚙️ Setup
 
