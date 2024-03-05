@@ -8,7 +8,7 @@ descope==1.6.3
 dnspython==2.3.0
 email-validator==2.0.0.post2
 Flask==2.3.2
-idna==3.4
+idna==3.6
 itsdangerous==2.1.2
 Jinja2==3.1.2
 MarkupSafe==2.1.2
