@@ -32,10 +32,11 @@ jobs:
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update @descope dependencies to actual latest versions" && git push)
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v3
         with:
-          commit-message: Update @descope dependencies
-          title: "[AUTO] Update @descope Dependencies to Actual Latest Versions"
-          body: Updates the versions of @descope/web-component and @descope/web-js-sdk to their actual latest versions across all mentions and imports.
-          branch: update-descope-versions
-          delete-branch: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update webjs-sdk and web-component versions
+          title: "Automated Dependency Update"
+          body: "This is an automated pull request to update the versions of @descope/webjs-sdk and @descope/web-component."
+          branch: "update-dependencies-$(date +%Y%m%d)"
+          base: "main"
