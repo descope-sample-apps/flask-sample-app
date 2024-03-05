@@ -27,6 +27,8 @@ jobs:
       - name: Commit and push if changes are detected
         run: |
           git add .
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions Bot"
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update @descope dependencies to actual latest versions" && git push)
 
       - name: Create Pull Request
