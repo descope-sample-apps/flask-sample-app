@@ -20,7 +20,9 @@ jobs:
           node-version: "16"
 
       - name: Update versions in HTML and JavaScript files
-        run: ./update-versions.sh
+        run: |
+          chmod +x ./.github/workflows/update-versions.sh
+          ./.github/workflows/update-versions.sh
 
       - name: Commit and push if changes are detected
         run: |
