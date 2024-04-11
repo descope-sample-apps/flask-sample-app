@@ -8,5 +8,12 @@
       "matchStrings": ["unpkg.com/(?<depName>.*)@(?<currentValue>[^/]*)"],
       "datasourceTemplate": "npm"
     }
+  ],
+  "packageRules": [
+    {
+      "matchPackagePrefixes": ["@descope/"],
+      "followTag": "latest",
+      "stabilityDays": 0
+    }
   ]
 }
