@@ -1,6 +1,12 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>descope-sample-apps/renovate-config"
+  "extends": ["local>descope-sample-apps/renovate-config"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["^.*$"],
+      "matchStrings": ["unpkg.com/(?<depName>.*)@(?<currentValue>[^/]*)"],
+      "datasourceTemplate": "npm"
+    }
   ]
 }
