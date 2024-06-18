@@ -4,7 +4,7 @@ cffi==1.15.1
 charset-normalizer==3.1.0
 click==8.1.3
 cryptography==42.0.4
-descope==1.6.3
+descope==1.6.5
 dnspython==2.6.1
 email-validator==2.0.0.post2
 Flask==2.3.3
@@ -16,5 +16,5 @@ pycparser==2.21
 PyJWT==2.7.0
 python-dotenv==1.0.0
 requests==2.32.2
-urllib3==2.0.7
+urllib3==2.2.2
 Werkzeug==3.0.3
