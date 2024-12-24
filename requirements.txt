@@ -10,7 +10,7 @@ email-validator==2.0.0.post2
 Flask==2.3.3
 idna==3.7
 itsdangerous==2.1.2
-Jinja2==3.1.4
+Jinja2==3.1.5
 MarkupSafe==2.1.2
 pycparser==2.21
 PyJWT==2.7.0
