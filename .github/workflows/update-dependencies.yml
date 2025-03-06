@@ -31,7 +31,7 @@ jobs:
           git diff --quiet && git diff --staged --quiet || git commit -m "Update @descope dependencies to actual latest versions"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: Update webjs-sdk and web-component versions
