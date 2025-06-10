@@ -15,6 +15,6 @@ MarkupSafe==2.1.2
 pycparser==2.21
 PyJWT==2.7.0
 python-dotenv==1.0.0
-requests==2.32.2
+requests==2.32.4
 urllib3==2.2.2
 Werkzeug==3.0.6
