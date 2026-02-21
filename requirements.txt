@@ -1,5 +1,5 @@
 blinker==1.6.2
-certifi==2024.7.4
+certifi==2024.12.14
 cffi==1.15.1
 charset-normalizer==3.1.0
 click==8.1.3
