@@ -13,7 +13,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.6
 MarkupSafe==2.1.2
 pycparser==2.21
-PyJWT==2.7.0
+PyJWT==2.11.0
 python-dotenv==1.0.0
 requests==2.32.4
 urllib3==2.6.3
